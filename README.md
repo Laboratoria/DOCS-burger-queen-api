@@ -1,133 +1,129 @@
-# Burger Queen - API com Node.js
+# Burger Queen - API con Node.js
 
 ## Índice
 
-* [1. Prefácio](#1-prefácio)
-* [2. Resumo do projeto](#2-resumo-do-projeto)
-* [3. Objetivos de aprendizagem](#3-objetivos-de-aprendizagem)
-* [4. Considerações gerais](#4-considerações-gerais)
-* [5. Critérios de aceitação mínimos do projeto](#5-critérios-de-aceitação-mínimos-do-projeto)
-* [6. Hacker (Devops) Edition con Docker](#6-edição-hacker-devops-com-docker)
-* [7. Pistas, tips e leituras complementares](#7-pistas-tips-e-leituras-complementares)
+* [1. Preámbulo](#1-pre%C3%A1mbulo)
+* [2. Resumen del proyecto](#2-resumen-del-proyecto)
+* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
+* [4. Consideraciones generales](#4-consideraciones-generales)
+* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptaci%C3%B3n-m%C3%ADnimos-del-proyecto)
+* [6. Hacker (Devops) Edition con Docker](#6-hacker-%28devops%29-edition-con-docker)
+* [7. Pistas, tips y lecturas complementarias](#6-pistas-tips-y-lecturas-complementarias)
 
-## 1. Prefácio
+## 1. Preámbulo
 
 ![Node.js logo](https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg)
 
-Um pequeno restaurante de hamburgueres, que está crescendo, necessita de um
-sistema para realizar pedidos usando um _tablet_, e que os enviem à
-cozinha para que sejam preparados de forma ordenada e eficiente.
+Un pequeño restaurante de hamburguesas, que está creciendo, necesita un
+sistema a través del cual puedan tomar pedidos usando una _tablet_, y enviarlos
+a la cocina para que se preparen ordenada y eficientemente.
 
-Este projeto tem duas áreas: interface (cliente) e API (servidor). Nosso
-cliente nos solicitou que desenvolvêssemos uma API que pode integrar com a
-interface, que outra equipe de desenvolvedores está trabalhando
-simultaneamente
+Este proyecto tiene dos áreas: interfaz web (cliente) y API (servidor). Nuestra
+clienta nos ha solicitado desarrollar la API que se puede integrar con la
+interfaz, que otro equipo de desarrolladoras está trabajando simultáneamente.
 
-## 2. Resumo do projeto
+## 2. Resumen del proyecto
 
-Como API, nesse caso nos referimos a um _servidor web_, que é basicamente
-um programa que _ouve_ o que acontece na aplicação através de uma porta de rede,
-pela qual podemos enviar _requisições_ (_requests_) e obter _respostas_ (_responses_)
-usando o protocolo HTTP (o HTTPS).
+Con una API en este caso nos referimos a un _servidor web_, que es
+básicamente un programa que _escucha_ en un puerto de red, a través del cual
+podemos enviarle _consultas_ (_request_) y obtener _respuestas_ (_response_)
+usando el protocolo HTTP (o HTTPS).
 
-Um servidor web deve _lidar_ com as requisições que chegam e devolver respostas,
-que serão enviadas de volta ao _cliente_. Quando falamos de _aplicações de servidor_,
-isso implica uma arquitetura de _cliente/servidor_, onde o cliente é um programa
-que faz requisições através de uma rede (por exemplo o navegador, o cURL, etc)
-e o servidor é o programa que recebe essas requisições e as responde.
+Un servidor web debe _manejar_ consultas entrantes y producir respuestas a esas
+consultas que serán enviadas de vuelta al _cliente_. Cuando hablamos de
+_aplicaciones de servidor_, esto implica una arquitectura de _cliente/servidor_,
+donde el cliente es un programa que hace consultas a través de una red (por
+ejemplo el navegador, cURL, etc.), y el _servidor_ es el programa que recibe
+estas consultas y las responde.
 
-O [Node.js](https://nodejs.org/) nos permite criar servidores web super eficientes
-de maneira relativamente simples, tudo isso usando JavaScript!
+[Node.js](https://nodejs.org/) nos permite crear servidores web súper eficientes
+de manera relativamente simple y todo esto usando JavaScript!
 
-Neste projeto partimos de um _boilerplate_ que já contém uma série de
-_endpoints_ (pontos de conexão ou URLs) e nos pedem para completar a aplicação.
-Isso implica que teremos que começar lendo a implementação existente e nos
-familiarizar com o _stack_ escolhido ([Node.js](https://nodejs.org/) e
-[Express](https://expressjs.com/)), além de complementá-lo com um motor de
-banco de dados. Recomendamos o uso do [MongoDB](https://www.mongodb.com/)
-e temos [um guia para começar com o MongoDB.](./guides/GETTING-STARTED-MONGO-DB.pt.md)
+En este proyecto partimos de un _boilerplate_ que ya contiene una serie de
+_endpoints_ (puntos de conexión o URLs) y nos piden completar la aplicación.
+Esto implica que tendremos que partir por leer la implementación existente, y
+familiarizarnos con el _stack_ elegido ([Node.js](https://nodejs.org/) y
+[Express](https://expressjs.com/)) y complementarlo con un motor de bases de
+datos. Recomendamos el uso de [MongoDB](https://www.mongodb.com/) y tenemos una
+[guía para empezar con MongoDB](./guides/GETTING-STARTED-MONGO-DB.md).
 
-[MongoDB](https://www.mongodb.com/),
-[PostgreSQL](https://www.postgresql.org/) e [MySQL](https://www.mysql.com/).
+La clienta nos ha dado un [link a la documentación](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
+que especifica el comportamiento esperado de la API que expondremos por
+HTTP. Ahí puedes encontrar todos los detalles de qué _endpoints_ debe
+implementar la aplicación, qué parámetros esperan, qué deben responder, etc.
 
-O cliente nos deu um
-[link](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
-para a documentação que especifica o comportamento esperado da API que
-iremos expor por HTTP.
-Lá podemos encontrar todos os detalhes que os _endpoints_ deve
-implementar na aplicação, que parâmetros esperam, o que devem responder, etc.
+El objetivo principal de aprendizaje es adquirir experiencia con **Node.js**
+como herramienta para desarrollar _aplicaciones de servidor_, junto con una
+serie de herramientas comunes usadas en este tipo de contexto (Express como
+framework, MongoDB como base datos, etc).
 
-O objetivo de aprendizagem principal é adquirir experiência com o **Node.js**
-como ferramenta para desenvolvimento de _aplicações de servidor_, junto com uma série
-de outras ferramentas comumente utilizadas nesse contexto (Express como
-framework, MongoDB como base de dados, etc.).
+En este proyecto tendrás que construir un servidor web que debe _servir_ `JSON`
+sobre `HTTP`, y desplegarlo en un servidor en la nube.
 
-Neste projeto, você desenvolverá um servidor web que deverá _servir_ `JSON`
-através de uma conexão `HTTP`, e implantá-lo em um servidor na nuvem.
+Para completar el proyecto tendrás que familiarizarte con conceptos como
+**rutas** (_routes_), **URLs**, **HTTP** y **REST** (verbs, request, response,
+headers, body, status codes...), **JSON**, **JWT** (_JSON Web Tokens_),
+**conexión con una base datos** (`MongoDB`),
+**variables de entorno**, **deployment**, etc.
 
-Ao final do projeto, você deverá estar familiarizada com conceitos como **rotas**
-(_routes_), **URLs**, **HTTP** (verbos, request, response, headers, body, status
-codes, etc), **JSON**, **JWT** (_JSON Web Tokens_), **conexão com uma base de dados**
-(`MongoDB`), **variables de ambiente**, **deployment**, etc.
+## 3. Objetivos de aprendizaje
 
-## 3. Objetivos de aprendizagem
-
-Reflita e depois enumere os objetivos que quer alcançar e aplique no seu projeto. Pense nisso para decidir sua estratégia de trabalho.
+Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en tu proyecto. Piensa en eso al decidir tu estrategia de trabajo.
 
 ### Node.js
 
-- [ ] **Instalar e usar módulos com npm**
+- [ ] **Instalar y usar módulos con npm**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://www.npmjs.com/">Sitio oficial de npm (em inglês)</a></li>
+  <li><a href="https://www.npmjs.com/">Sitio oficial de npm (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Configuração do package.json**
+- [ ] **Configuración de package.json**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://docs.npmjs.com/files/package.json">package.json - Documentação oficial (em inglês)</a></li>
+  <li><a href="https://docs.npmjs.com/files/package.json">package.json - Documentación oficial (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Configuração do npm-scripts**
+- [ ] **Configuración de npm-scripts**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://docs.npmjs.com/misc/scripts">scripts - Documentação oficial (em inglês)</a></li>
+  <li><a href="https://docs.npmjs.com/misc/scripts">scripts - Documentación oficial (en inglés)</a></li>
 </ul></details>
 
 ### JavaScript
 
-- [ ] **Testes unitários (unit tests)**
+- [ ] **Pruebas unitarias (unit tests)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://jestjs.io/docs/pt-BR/getting-started">Introdução ao Jest - Documentação oficial</a></li>
+  <li><a href="https://jestjs.io/docs/es-ES/getting-started">Empezando con Jest - Documentación oficial</a></li>
 </ul></details>
 
-- [ ] **Testes assíncronos**
+- [ ] **Pruebas asíncronas**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://jestjs.io/docs/pt-BR/asynchronous">Testando Código Assíncrono - Documentação oficial</a></li>
+  <li><a href="https://jestjs.io/docs/es-ES/asynchronous">Tests de código asincrónico con Jest - Documentación oficial</a></li>
 </ul></details>
 
-- [ ] **Uso de mocks e espiões**
+- [ ] **Uso de mocks y espías**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://jestjs.io/docs/pt-BR/manual-mocks">Simulações Manuais - Documentação oficial</a></li>
+  <li><a href="https://jestjs.io/docs/es-ES/manual-mocks">Manual Mocks con Jest - Documentación oficial</a></li>
 </ul></details>
 
-- [ ] **Testes de integração (end-to-end)**
+- [ ] **Pruebas de integración (end-to-end)**
 
-- [ ] **Módulos de ECMAScript (ES modules)**
+- [ ] **Módulos de ECMAScript (ES Modules)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/import">import - MDN</a></li>
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/export">export - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import">import - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export">export - MDN</a></li>
 </ul></details>
 
 - [ ] **Módulos de CommonJS**
@@ -139,99 +135,99 @@ Reflita e depois enumere os objetivos que quer alcançar e aplique no seu projet
 
 - [ ] **Uso de linter (ESLINT)**
 
-- [ ] **Uso de identificadores descritivos (Nomenclatura e Semântica)**
+- [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
 
-### Controle de Versões (Git e GitHub)
+### Control de Versiones (Git y GitHub)
 
-- [ ] **Git: Instalação e configuração**
+- [ ] **Git: Instalación y configuración**
 
-- [ ] **Git: Controle de versão com git (init, clone, add, commit, status, push, pull, remote)**
+- [ ] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
 
-- [ ] **Git: Integração de mudanças entre ramos (branch, checkout, fetch, merge, reset, rebase, tag)**
+- [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
 
-- [ ] **GitHub: Criação de contas e repositórios, configuração de chave SSH**
+- [ ] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
 
-- [ ] **GitHub: Implantação com GitHub Pages**
+- [ ] **GitHub: Despliegue con GitHub Pages**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://pages.github.com/">Site oficial do GitHub Pages</a></li>
+  <li><a href="https://pages.github.com/">Sitio oficial de GitHub Pages</a></li>
 </ul></details>
 
-- [ ] **GitHub: Colaboração pelo Github (branches | forks | pull requests | code review | tags)**
+- [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
 
-- [ ] **GitHub: Organização pelo Github (projects | issues | labels | milestones | releases)**
+- [ ] **GitHub: Organización en Github (projects | issues | labels | milestones | releases)**
 
 ### Express.js
 
-- [ ] **Gerenciamento de rotas**
+- [ ] **Manejo de rutas**
 
-- [ ] **Uso e criação de middleware**
+- [ ] **Uso y creación de middleware**
 
 ### HTTP
 
-- [ ] **Consulta ou solicitação (request) e resposta (response).**
+- [ ] **Consulta o petición (request) y respuesta (response).**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Overview">Visão geral do protocolo HTTP - MDN</a></li>
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Messages">Mensagens HTTP - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP/Overview">Generalidades del protocolo HTTP - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP/Messages">Mensajes HTTP - MDN</a></li>
 </ul></details>
 
-- [ ] **Cabeçalhos (headers)**
+- [ ] **Cabeceras (headers)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers">Cabeçalhos HTTP - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP/Headers">HTTP headers - MDN</a></li>
 </ul></details>
 
-- [ ] **Corpo (body)**
+- [ ] **Cuerpo (body)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Messages#corpo">Mensagens HTTP / Corpo - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP/Messages#cuerpo">Cuerpo de Mensajes HTTP - MDN</a></li>
 </ul></details>
 
 - [ ] **Verbos HTTP**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Methods">Métodos de requisição HTTP - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP/Methods">Métodos de petición HTTP - MDN</a></li>
 </ul></details>
 
 - [ ] **Códigos de status de HTTP**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status">Códigos de status de respostas HTTP - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP/Status">Códigos de estado de respuesta HTTP - MDN</a></li>
   <li><a href="https://dev.to/khaosdoctor/the-complete-guide-to-status-codes-for-meaningful-rest-apis-1-5c5">The Complete Guide to Status Codes for Meaningful ReST APIs - dev.to</a></li>
 </ul></details>
 
-- [ ] **Encodings e JSON**
+- [ ] **Encodings y JSON**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://www.json.org/json-pt.html">Introdução ao JSON - Documentação oficial</a></li>
+  <li><a href="https://www.json.org/json-es.html">Introducción a JSON - Documentación oficial</a></li>
 </ul></details>
 
 - [ ] **CORS (Cross-Origin Resource Sharing)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/CORS">Cross-Origin Resource Sharing (CORS) - MDN</a></li>
+  <li><a href="https://developer.mozilla.org/es/docs/Web/HTTP/CORS">Control de acceso HTTP (CORS) - MDN</a></li>
 </ul></details>
 
-### Autenticação
+### Autenticación
 
 - [ ] **JWT (JSON Web Token)**
 
-- [ ] **Armazenamento e acesso de senhas**
+- [ ] **Almacenamiento y acceso de contraseñas**
 
 ### WebOps
 
-- [ ] **Variáveis de ambiente**
+- [ ] **Variables de entorno**
 
-- [ ] **Containers (Docker)**
+- [ ] **Contenedores (Docker)**
 
 - [ ] **Docker compose**
 
@@ -239,30 +235,30 @@ Reflita e depois enumere os objetivos que quer alcançar e aplique no seu projet
 
 ### MongoDB
 
-- [ ] **Operações CRUD (Create-Read-Update-Delete)**
+- [ ] **Operaciones CRUD (Create-Read-Update-Delete)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://docs.mongodb.com/manual/crud/">MongoDB CRUD Operations - Docs (em inglês)</a></li>
-  <li><a href="https://docs.mongodb.com/manual/tutorial/insert-documents/">Insert Documents - Docs (em inglês)</a></li>
-  <li><a href="https://docs.mongodb.com/manual/tutorial/query-documents/">Query Documents - Docs (em inglês)</a></li>
-  <li><a href="https://docs.mongodb.com/manual/tutorial/update-documents/">Update Documents - Docs (em inglês)</a></li>
-  <li><a href="https://docs.mongodb.com/manual/tutorial/remove-documents/">Delete Documents - Docs (em inglês)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/crud/">MongoDB CRUD Operations - Docs (en inglés)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/tutorial/insert-documents/">Insert Documents - Docs (en inglés)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/tutorial/query-documents/">Query Documents - Docs (en inglés)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/tutorial/update-documents/">Update Documents - Docs (en inglés)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/tutorial/remove-documents/">Delete Documents - Docs (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Modelos e esquemas de dados**
+- [ ] **Modelos y esquemas de datos**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://docs.mongodb.com/manual/core/schema-validation/">Schema Validation - Docs (em inglês)</a></li>
-  <li><a href="https://docs.mongodb.com/manual/core/data-model-design/">Data Model Design - Docs (em inglês)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/core/schema-validation/">Schema Validation - Docs (en inglés)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/core/data-model-design/">Data Model Design - Docs (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Recuperação e restauração (backup/restore)**
+- [ ] **Respaldo y restauración (backup/restore)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://docs.mongodb.com/manual/core/backups/">MongoDB Backup Methods - Docs (em inglês)</a></li>
+  <li><a href="https://docs.mongodb.com/manual/core/backups/">MongoDB Backup Methods - Docs (en inglés)</a></li>
 </ul></details>
 
 ### PostgreSQL
@@ -271,21 +267,21 @@ Reflita e depois enumere os objetivos que quer alcançar e aplique no seu projet
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://www.postgresql.org/docs/14/app-psql.html">psql - Docs (em inglês)</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/app-psql.html">psql - Docs (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Tipos de dados**
+- [ ] **Tipos de datos**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://www.postgresql.org/docs/14/datatype.html">Chapter 8. Data Types - Docs (em inglês)</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/datatype.html">Chapter 8. Data Types - Docs (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Backup e restauração (backup/restore)**
+- [ ] **Respaldo y restauración (backup/restore)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://www.postgresql.org/docs/14/backup.html">Chapter 26. Backup and Restore - Docs (em inglês)</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/backup.html">Chapter 26. Backup and Restore - Docs (en inglés)</a></li>
 </ul></details>
 
 ### MySQL
@@ -294,42 +290,42 @@ Reflita e depois enumere os objetivos que quer alcançar e aplique no seu projet
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/mysql.html">The MySQL Command-Line Client - Docs (em inglês)</a></li>
+  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/mysql.html">The MySQL Command-Line Client - Docs (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Tipos de dados**
+- [ ] **Tipos de datos**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/data-types.html">Chapter 11 Data Types - Docs (em inglês)</a></li>
+  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/data-types.html">Chapter 11 Data Types - Docs (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Backup e restauração (backup/restore)**
+- [ ] **Respaldo y restauración (backup/restore)**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/backup-and-recovery.html">Chapter 7 Backup and Recovery - Docs (em inglês)</a></li>
-  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html">mysqldump — A Database Backup Program - Docs (em inglês)</a></li>
+  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/backup-and-recovery.html">Chapter 7 Backup and Recovery - Docs (en inglés)</a></li>
+  <li><a href="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html">mysqldump — A Database Backup Program - Docs (en inglés)</a></li>
 </ul></details>
 
-### Bases de dados
+### Bases de datos
 
-- [ ] **Modelagem de dados**
+- [ ] **Modelado de datos**
 
-- [ ] **Conexão**
+- [ ] **Conexión**
 
 ### SQL
 
-- [ ] **Criação e modificação de tabelas**
+- [ ] **Creación y modificación de tablas**
 
   <details><summary>Links</summary><ul>
 
-  <li><a href="https://www.w3schools.com/sql/sql_create_table.asp">SQL CREATE TABLE Statement - w3schools (em inglês)</a></li>
-  <li><a href="https://www.postgresql.org/docs/9.1/sql-createtable.html">CREATE TABLE Statement - PostgreSQL Docs (em inglês)</a></li>
-  <li><a href="https://www.postgresql.org/docs/9.1/sql-altertable.html">ALTER TABLE Statement - PostgreSQL Docs (em inglês)</a></li>
+  <li><a href="https://www.w3schools.com/sql/sql_create_table.asp">SQL CREATE TABLE Statement - w3schools (en inglés)</a></li>
+  <li><a href="https://www.postgresql.org/docs/9.1/sql-createtable.html">CREATE TABLE Statement - PostgreSQL Docs (en inglés)</a></li>
+  <li><a href="https://www.postgresql.org/docs/9.1/sql-altertable.html">ALTER TABLE Statement - PostgreSQL Docs (en inglés)</a></li>
 </ul></details>
 
-- [ ] **Operações CRUD (Create-Read-Update-Delete)**
+- [ ] **Operaciones CRUD (Create-Read-Update-Delete)**
 
   <details><summary>Links</summary><ul>
 
@@ -339,7 +335,7 @@ Reflita e depois enumere os objetivos que quer alcançar e aplique no seu projet
   <li><a href="https://www.postgresql.org/docs/8.1/sql-delete.html">DELETE</a></li>
 </ul></details>
 
-- [ ] **Exclusão de tabelas ou bancos de dados inteiros com DROP**
+- [ ] **Borrado de tablas o bases de datos enteras con DROP**
 
   <details><summary>Links</summary><ul>
 
@@ -347,54 +343,54 @@ Reflita e depois enumere os objetivos que quer alcançar e aplique no seu projet
   <li><a href="https://www.postgresql.org/docs/8.2/sql-dropdatabase.html">DROP DATABASE</a></li>
 </ul></details>
 
-## 4. Considerações gerais
+## 4. Consideraciones generales
 
-Este projeto será realizado em duplas e pode estar integrado com o projeto
+Este proyecto se realizará en duplas y podrá integrarse con el proyecto
 [Burger Queen API client](../04-burger-queen-api-client)
-que a equipe de Frontend developers do seu squad desenvolve simultaneamente.
+que desarrolle simultáneamente el equipo de Frontend developers de tu squad.
 
-A lógica do projeto deve estar implementada totalmente em JavaScript (ES6).
-Neste projeto está permitido usar bibliotecas ou frameworks, assim como
-extensões para a linguagem com `babel` (neste caso você incluir um
-comando `npm build`).
+La lógica del proyecto debe estar implementada completamente en JavaScript.
+En este proyecto está permitido usar librerías o frameworks, asi como
+extensiones al lenguaje con `babel` (caso en el cual deberás incluir un
+comando `npm run build`).
 
-Os testes deven cobrir um mínimo de 90% de _statements_, _functions_,
-_lines_ e _branches_. Embora o boilerplate não inclua as configurações para
-testes unitários, estes são obrigatórios.
+Los tests deben cubrir un mínimo del 90% de _statements_, _functions_,
+_lines_ y _branches_. Si bien el boilerplate no incluye la configuración para
+pruebas unitarias, estas son obligatorias.
 
-Outro requisito da equipe de QA do nosso cliente é realizar
-**testes _end-to-end_**, que usaremos para verificar o comportamento desde o
-ponto de vista de HTTP, desde fora do servidor. Estes testes, diferente dos
-testes unitarios, não testam cada parte separadamente, mas testam a
-aplicação completa, do princípio ao fim. Esses testes, por não fazerem uso direto
-do código-fonte da aplicação, podem ser executados diretamente em uma URL
-remota, pois a interface em teste é HTTP.
+Otro requerimiento del equipo de QA de nuestra clienta es realizar
+**pruebas _end-to-end_**, que usaremos para verificar el comportamiento desde el
+punto de vista de HTTP, desde afuera del servidor. Estos tests, a diferencia de
+las pruebas unitarias, no prueban cada pieza por separado sino que prueban la
+aplicación completa, de principio a fin. Estas pruebas, al no hacer uso directo
+del código fuente de la aplicación, pueden ejecutarse directamente sobre una URL
+remota, ya que la interfaz sometida a pruebas es HTTP.
 
-O _boilerplate_ já contém o setup e configuração
-necessária para executar todos os tests _end-to-end_ com o comando `npm run test:e2e`.
+El _boilerplate_ ya contiene el setup y configuración
+necesaria para ejecutar todos los tests _end-to-end_ con el comando `npm run test:e2e`.
 
 ```sh
-# Execute testes e2e na instância local. Isso levanta a aplicação com npm
-# start e execute os tests na URL desta instancia (por padrão
+# Corre pruebas e2e sobre instancia local. Esto levanta la aplicación con npm
+# start y corre los tests contra la URL de esta instancia (por defecto
 # http://127.0.0.1:8080).
 npm run test:e2e
 
-# Execute testes e2e em URL remoto
-REMOTE_URL=<TODO: colocar URL> npm run test:e2e
+# Corre pruebas e2e sobre URL remota
+REMOTE_URL=<TODO: poner URL> npm run test:e2e
 ```
 
-Os testes _end-to-end_ já estão concluidos no _boilerplate_, então pode
-usá-los como um guia de implementação e lista de verificação de integridade.
+Las pruebas _end-to-end_ ya están completas en el _boilerplate_, así que puedes
+usarlas como guía de implementación y checklist de completitud.
 
-## 5. Critérios de aceitação mínimos do projeto
+## 5. Criterios de aceptación mínimos del proyecto
 
 ### 5.1 API
 
-Conforme estabelecido pela
-[documentação](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
-entregue pelo nosso cliente, a API deve expor os seguintes endpoints:
+Según lo establecido por la
+[documentación](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
+entregada por nuestra clienta, la API debe exponer los siguientes endpoints:
 
-#### 5.1,1 `/`
+#### 5.1.1 `/`
 
 * `GET /`
 
@@ -428,107 +424,116 @@ entregue pelo nosso cliente, a API deve expor os seguintes endpoints:
 
 ### 5.2 CLI
 
-O cliente solicitou que a aplicação tenha um comando **`npm start`**
-que deve ser responsável por executar nossa aplicação node e que também possa
-receber informações de configuração, como a porta a ser escutada, qual
-banco de dados conectar, etc. Esses dados de configuração serão distintos entre os
-diferentes ambientes (desenvolvimento, produção, ...). O _boilerplate_ já implementa
-[o código necessário](config.js) para ler esta informação dos
-[argumentos de invocação](https://nodejs.org/docs/latest/api/process.html#process_process_argv)
-e o
-[ambiente](https://nodejs.org/docs/latest/api/process.html#process_process_env).
+La clienta nos ha solicitado que la aplicación cuente un comando **`npm start`**
+que se debe encargar de ejecutar nuestra aplicación node y que además pueda
+recibir información de configuración, como el puerto en el que escuchar, a qué
+base datos conectarse, etc. Estos datos de configuración serán distintos entre
+diferentes entornos (desarrollo, producción, etc.). El _boilerplate_ ya
+implementa [el código necesario](config.js) para leer esta información de los
+[argumentos de invocación](https://nodejs.org/docs/latest/api/process.html#process_process_argv)
+y el
+[entorno](https://nodejs.org/docs/latest/api/process.html#process_process_env).
 
-#### 5.2.1 Argumentos de linha de comando
+#### 5.2.1 Argumentos de línea de comando
 
-Podemos especificar a porta onde a aplicação deve iniciar, passando um argumento
-ao invocar nosso programa:
+Podemos especificar el puerto en el que debe arrancar la aplicación pasando un
+argumento a la hora de invocar nuestro programa:
 
 ```sh
-# Inicia a aplicação na porta 8888 usando npm
+# Arranca la aplicación el puerto 8888 usando npm
 npm start 8888
 ```
 
-#### 5.2.2 Variáveis de ambiente
+#### 5.2.2 Variables de entorno
 
-Nossa aplicação usa as seguintes variáveis de ambiente:
+Nuestra aplicación usa las siguientes variables de entorno:
 
-* `PORT`: Se nenhuma porta for especificada como argumento da linha de comando
-  podemos usar a variable de ambiente `PORT` para especificar a porta. Valor
-  por padrão `8080`.
-* `DB_URL`: A _string_ de conexão de _MongoDB_, _PostgreSQL_ ou _MySQL_. Quando
-  executemos a aplicação em nosso computador (em ambiente de desenvolvimento),
-  podemos usar um banco de dados local, mas em produção deveremos usar as
-  instâncias configuradas com `docker-compose` (mais sobre isso na seção de
-  **Deployment**).
-* `JWT_SECRET`: Nossa aplicação implementa autenticação usando JWT (JSON
-   Web Tokens). Para assinar (criptografar) e verificar (descriptografar) os tokens,
-  nossa aplicação precisa de um segredo. Localmente, pode usar o valor
-  padrão (`xxxxxxxx`), mas é muito importante usar um _segredo_ real
-  na producção.
-* `ADMIN_EMAIL`: Opcionalmente podemos especificar um email e password para
-  o usuario admin (root). Se esses detalhes estiverem presentes, a aplicação se
-  certificará que exista o usuário e que tenha permissões de administrador. Valor
-  por padrão `admin@localhost`.
-* `ADMIN_PASSWORD`: Se for especificado um `ADMIN_EMAIL`, devemos passar
-  também uma senha para o usuário admin. Valor por padrão: `changeme`.
+* `PORT`: Si no se ha especificado un puerto como argumento de línea de comando,
+  podemos usar la variable de entorno `PORT` para especificar el puerto. Valor
+  por defecto `8080`.
+* `DB_URL`: El _string_ de conexión de _MongoDB_. Cuando ejecutemos la
+  aplicación en nuestra computadora (en entorno de desarrollo), podemos usar el
+  una base de datos local, pero en producción deberemos utilizar las instancias
+  configuradas con `docker-compose` (mas sobre esto en la siguiente sección de
+  **Deployment**)
+* `JWT_SECRET`: Nuestra aplicación implementa autenticación usando JWT (JSON
+  Web Tokens). Para poder firmar (cifrar) y verificar (descifrar) los tokens,
+  nuestra aplicación necesita un secreto. En local puedes usar el valor por
+  defecto (`xxxxxxxx`), pero es muy importante que uses un _secreto_ de verdad
+  en producción.
+* `ADMIN_EMAIL`: Opcionalmente podemos especificar un email y password para
+  el usuario admin (root). Si estos detalles están presentes la aplicación se
+  asegurará que exista el usuario y que tenga permisos de administrador. Valor
+  por defecto `admin@localhost`.
+* `ADMIN_PASSWORD`: Si hemos especificado un `ADMIN_EMAIL`, debemos pasar
+  también una contraseña para el usuario admin. Valor por defecto: `changeme`.
 
-### 5.3 Implantação (Deployment)
+### 5.3 Despliegue (Deployment)
 
-Você pode escolher o provedor (ou provedores) que preferir,
-juntamente com o mecanismo de implantação e estratégia de hospedagem.
-Recomendamos que você explore as seguintes opções:
+Puedes elegir el proveedor (o proveedores) que prefieras junto
+con el mecanismo de despliegue y estrategia de alojamiento. Te recomendamos
+explorar las siguientes opciones:
 
-* [Vercel](https://vercel.com/) é uma opção focada em aplicativos
-da web estáticos (como os construídos com React). No entanto,
-o Vercel também nos permite implantar aplicativos node usando
-[Serverless Functions](https://vercel.com/docs/serverless-functions/introduction)
-[MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-é uma ótima opção para hospedar nosso banco de dados de produção,
-que pode ser usado em conjunto com qualquer uma das opções mencionadas acima.
+* [Vercel](https://vercel.com/) es una opción enfocada
+  a aplicaciones web estáticas (como las que se construyen con React). Sin embargo,
+  Vercel también nos permite desplegar aplicaciones node usando [Serverless
+  Functions](https://vercel.com/docs/serverless-functions/introduction).
+* [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+  es una muy buena opción para alojar nuestra base datos de producción, la cuál
+  podemos usar en conjunción con cualquiera de las opciones mencionadas arriba.
 
-Se tiver dúvidas sobre as diferentes opções de implantação (que são várias),
-não hesite em consultar seus colegas e seus coaches.
+Si tienes dudas sobre las diferentes (y múltiples) opciones de despliegue no
+dudes en consultar con tus pares y tus coaches.
 
-## 6. Edição Hacker (DevOps) com Docker
+### 6. Hacker (Devops) Edition con Docker
 
-Nossa cliente nos informou que sua equipe de DevOps está sempre
-ocupada com muitas tarefas, portanto, ela nos pede como requisito que
-o aplicativo seja configurado com `docker-compose` para que possa ser
-implantado facilmente em qualquer ambiente.
+Nuestra clienta nos ha manifestado que su equipo de _devops_ está siempre con
+muchas tareas, por lo que nos pide como requerimiento que la aplicación esté
+configurada con `docker-compose` para que pueda ser desplegada sin dificultades
+en cualquier entorno.
 
-O boilerplate já possui uma configuração inicial de `docker-compose`
-para o aplicativo Node.js, sua tarefa será estender essa configuração para
-incluir a configuração do banco de dados. Tenha em mente que,
-como você terá dois servidores sendo executados na mesma configuração,
-você precisará expor os serviços em portas diferentes.
+El _boilerplate_ ya cuenta con una configuración inicial de `docker-compose` para
+la aplicación de node, tu tarea será extender esa configuración para incluir
+la configuración de base de datos. Ten en cuenta que como vas a tener dos
+servidores corriendo sobre una misma configuración, deberás exponer
+los servicios en diferentes puertos.
 
-Leia o [guia para docker](./guides/GETTING-STARTED-DOCKER.pt.md) incluído
-no projeto para mais informações.
+Lee la [**guía para docker**] (./guides/GETTING-STARTED-DOCKER.md)
+incluido en el proyecto para mas información.
 
-Para testar sua configuração do Docker, recomendamos que você use o
-`docker-compose` localmente (em seu computador) para executar o
-aplicativo junto com o banco de dados.
+Para probar tu configuración de docker, te recomendamos usar `docker-compose`
+localmente (en tu computadora) para ejecutar la aplicación junto
+con la base de datos.
 
-Quanto à implantação, você pode escolher o provedor (ou provedores)
-que preferir, juntamente com o mecanismo de implantação e estratégia
-de hospedagem. Recomendamos que você explore as seguintes opções:
+Con respecto al despliegue, puedes elegir el proveedor (o proveedores)
+que prefieras junto con el mecanismo de despliegue y estrategia de alojamiento.
+Te recomendamos explorar las siguientes opciones:
 
-* Se quiser explorar opções mais personalizadas e ver o docker do lado do
-servidor, pode considerar provedores como
-[AWS (Amazon Web Services)](https://aws.amazon.com/) ou
-[GCP (Google Cloud Platform)](https://cloud.google.com/), ambos possuem algum tipo
-de serviço experimental gratuito (_free tier_) assim como instâncias de servidores
-virtuais (VPS), onde configuramos nosso próprio Docker ou serviços para implantar
-aplicações em contêineres (por exemplo [Compute Engine](https://cloud.google.com/compute/docs/containers)
-de GCP ou [Elastic Container Service](https://aws.amazon.com/ecs/) de AWS).
+* Si quieres explorar opciones más personalizadas y ver docker del lado del
+  servidor puedes considerar proveedores como
+  [AWS (Amazon Web Services)](https://aws.amazon.com/) o
+  [GCP (Google Cloud Platform)](https://cloud.google.com/), ambos tienen algún
+  tipo de _free tier_ así como tanto _instancias_ de _servidores virtuales_
+  (VPS) donde configurar nuestro propio Docker o servicios para desplegar
+  aplicaciones en contenedores (por ejemplo [Compute Engine](https://cloud.google.com/compute/docs/containers)
+  de GCP o [Elastic Container Service](https://aws.amazon.com/ecs/) de AWS).
 
-## 7. Pistas, tips e leituras complementares
+## 7. Pistas, tips y lecturas complementarias
+
+### Primeros pasos
+
+> :information_source: Antes de comenzar a programar te recomendamos leer y
+> seguir con detenimiento la [**guía de _primeros pasos_**](./GETTING-STARTED-MONGODB.md)
+> para ayudarte con el stack recomendado y configurar tu entorno de desarrollo.
+
+### Otros recursos
 
 * [Express](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
 * [MongoDB Node Driver](https://www.mongodb.com/docs/drivers/node/current/)
 * [docker](https://docs.docker.com/)
 * [docker compose](https://docs.docker.com/compose/)
+* [¿Qué es Docker? | Curso de Docker | Platzi Cursos](https://youtu.be/hQgvt-s-AHQ)
 * [Postman](https://www.getpostman.com)
-* [Variável de ambiente - Wikipedia](https://pt.wikipedia.org/wiki/Variável_de_ambiente)
+* [Variable de entorno - Wikipedia](https://es.wikipedia.org/wiki/Variable_de_entorno)
 * [`process.env` - Node.js docs](https://nodejs.org/api/process.html#process_process_env)

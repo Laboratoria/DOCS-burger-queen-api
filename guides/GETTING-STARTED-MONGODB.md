@@ -1,92 +1,96 @@
-# Primeiros passos com o MongoDB
+# Primeros pasos con MongoDB
 
-O MongoDB é um banco de dados não relacional e é o mais comum (popular)
-atualmente no ecossistema Node.js.
+MongoDB es un base de datos no-relacional, y es la más _común_ (popular)
+a día de hoy en el ecosistema de Node.js.
 
-Se você estiver trabalhando com o MongoDB e Docker, é melhor ler primeiro
-o guia "Primeiros passos com o Docker". Se você estiver instalando o MongoDB
-e desenvolvendo o projeto sem o Docker neste momento, continue lendo este guia.
+Si vas a trabajar con MongoDB y Docker, mejor lee primero
+[**la guía de _primeros pasos con Docker_**](./GETTING-STARTED-DOCKER.md).
+Si vas a instalar MongoDB y desarrollar el proyecto sin
+Docker en este momento, sigue leyendo esta guía.
 
-Depois de criar o seu fork e clonar o repositório em seu computador,
-execute o comando npm install para instalar as dependências básicas.
-Antes de começar a codificar, precisamos criar nosso ambiente de desenvolvimento.
-Recomendamos seguir os seguintes passos:
+Una vez creado tu fork y clonado el repo en tu computadora, haces `npm install`
+para instalar las dependencias básicas.
+Antes de poder comenzar a codear, tenemos que crear nuestro _entorno de desarrollo_.
+Para ello te recomendamos seguir los siguientes pasos:
 
-1. [Instalar o MongoDB e o Compass](#1-instalar-o-mongodb-e-o-compass)
-2. [Iniciar o banco de dados e o servidor](#2-iniciar-o-banco-de-dados-e-o-servidor)
-3. [Escolher o módulo cliente](#3-escolher-um-módulo-cliente)
-4. [Definir esquemas](#4-definir-esquemas)
-5. [Implementar as primeiras tarefas (TODOs)](#5-implementar-os-primeiros-todos)
-6. [Definir estratégia de testes unitários](#6-definir-estratégia-de-testes-unitários)
-7. [Familiarizar-se com os testes de integração (e2e)](#7-familiarizar-se-com-os-testes-de-integração-e2e)
+* [1. Instalar MongoDB y Compass](#1-instalar-mongodb-y-compass)
+* [2. Levanta la base de datos y servidor](#2-levanta-la-base-de-datos-y-servidor)
+* [3. Elegir módulo (cliente)](#3-elegir-módulo-cliente)
+* [4. Definir esquemas](#4-definir-esquemas)
+* [5. Implementar los primeros TODOs](#5-implementar-los-primeros-todos)
+* [6. Definir estrategia de pruebas unitarias](#6-definir-estrategia-de-pruebas-unitarias)
+* [7. Familiarizarte con las pruebas de integración (e2e)](#7-familiarizarte-con-las-pruebas-de-integración-e2e)
 
-## 1. Instalar o MongoDB e o Compass
+***
 
-O site do MongoDB possui tutoriais sobre como instalar a [Community Edition](https://www.mongodb.com/docs/compass/current/install/).
-Escolha sua plataforma (Windows, Mac, Ubuntu, etc.) e siga [o tutorial](https://www.mongodb.com/docs/manual/installation/#mongodb-installation-tutorials).
+## 1. Instalar MongoDB y Compass
 
-Nos tutoriais, você irá baixar e instalar o MongoDB em seu sistema,
-juntamente com algumas ferramentas e comandos para usar no terminal.
+El sitio de MongoDB tiene tutoriales de cómo instalar la [Community Edition](https://www.mongodb.com/docs/compass/current/install/).
+Elige tu plataforma (Windows, Mac, Ubuntu etc) y sigue [el tutorial](https://www.mongodb.com/docs/manual/installation/#mongodb-installation-tutorials).
 
-Recomendamos também que você instale o [Compass](https://www.mongodb.com/products/compass),
-que é uma GUI (Interface Gráfica do Usuário) para interagir com o banco de dados.
-Você pode interagir com o MongoDB sem o Compass apenas no terminal, mas uma
-GUI pode ajudá-lo a visualizar e entender o que está no banco de dados.
-Siga [as instruções de instalação do Compass](https://www.mongodb.com/docs/compass/current/install/)).
+Con los tutoriales, vas a descargar y instalar MongoDB en tu sistema,
+con algunas herramientas y comandos para usar en la línea de comando.
 
-## 2. Iniciar o banco de dados e o servidor
+También recomendamos que instales [Compass](https://www.mongodb.com/products/compass),
+que es un GUI (Graphical User Interface) para interactuar con la base de datos.
+Puedes interactuar con MongoDB sin Compass y solo en la linea de comando,
+pero un GUI puede ayudarte visualizar y entender lo que está en
+la base de datos. Sigue [las instrucciones de instalación de Compass](https://www.mongodb.com/docs/compass/current/install/).
 
-Podemos dizer que este projeto possui dois "serviços":
-um é o banco de dados para armazenar produtos, usuários, etc.,
-e o outro é o servidor para expor a API.
+## 2. Levanta la base de datos y servidor
 
-Esses serviços precisam estar em execução para que a API funcione.
+Podemos decir que este proyecto tiene dos "servicios", uno es la base de datos para
+almacenar los productos, usuarios, etc., y el otro es el servidor para exponer
+el API.
 
-Iniciar o servidor é bastante simples: execute `npm start` para executar
-o arquivo [`index.js`](../index.js), que contém a lógica básica de
-um servidor com Express.
+Estos servicios tienen que estar corriendo, para que
+el API pueda funcionar.
 
-Como iniciar o servidor depende da sua instalação e sistema.
-Por exemplo, no macOS, se você instalou com o homebrew, pode usar o comando
-`brew services start mongodb-community@6.0` para iniciá-lo.
-Ou, sem o homebrew, utilize `mongod --config /usr/local/etc/mongod.conf --fork`.
-No Windows, é necessário iniciar o serviço pelo console de serviços.
+Correr el servidor es bien simple: con `npm start` va a ejecutar
+[`index.js`](../index.js) que tiene la lógica básica de un servidor con express.
 
-Consulte o
-[guia de instalação para macOS](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#run-mongodb-community-edition),
-[guia de instalação para Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#run-mongodb-community-edition-as-a-windows-service)
-ou a documentação específica da sua instalação para obter exemplos de como
-iniciar o servidor.
+Cómo levantar el servidor, este depende de tu instalación y sistema.
+Por ejemplo, en MacOS si instalaste con `homebrew`, puede usar
+`brew services start mongodb-community@6.0` para levantarlo. O sin `homebrew`,
+`mongod --config /usr/local/etc/mongod.conf --fork`. En Windows, hay que
+levantarlo desde Services console.
 
-## 3. Escolher um módulo (cliente)
+Revisa [la guía de instalación de
+](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#run-mongodb-community-edition),
+[guía de instalación de Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#run-mongodb-community-edition-as-a-windows-service),
+o tu instalación en particular, para ejemplos en cómo levantarlo.
 
-Agora que já temos um servidor de banco de dados, precisamos escolher
-um módulo ou biblioteca projetado para interagir com nosso banco de dados
-a partir do Node.js. Existem muitas opções, mas para este projeto,
-recomendamos o uso do [Node.js driver do MongoDB](https://www.mongodb.com/docs/drivers/node/current/)
-que é a forma mais direta de interagir com sua instância do MongoDB.
+## 3. Elegir módulo (cliente)
 
-É necessário instalar o Node.js Driver neste projeto usando o `npm`,
-[verifique os documentos para mais informações](https://www.mongodb.com/docs/drivers/node/current/quick-start/download-and-install/#install-the-node.js-driver).
+Ahora que ya tenemos un servidor de base de datos, vamos a necesitar elegir un
+módulo o librería diseñado para interactuar con nuestra base de datos desde
+Node.js. Existen un montón de opciones, pero para este proyecto te recomendamos
+usar el [Node.js driver de MongoDB](https://www.mongodb.com/docs/drivers/node/current/)
+que es la forma más directa de interactuar con tu instancia de MongoDB.
 
-O _boilerplate_ já inclui um arquivo config.js onde as variáveis
-de ambiente são lidas, e uma delas é DB_URL. Conforme podemos ver,
-esse valor está sendo atribuído à propriedade dbUrl do módulo config.
+Hay que instalar el Node.js Driver en este proyecto usando `npm`,
+revisa [la documentación oficial para más información](https://www.mongodb.com/docs/drivers/node/current/quick-start/download-and-install/#install-the-node.js-driver).
+
+El _boilerplate_ ya incluye un archivo `config.js` donde se leen las
+variables de entorno, y entre ellas está `DB_URL`. Como vemos ese valor lo
+estamos asignando en la propiedad `dbUrl` del módulo `config`.
 
 ```js
 // `config.js`
 exports.dbUrl = process.env.MONGO_URL || process.env.DB_URL || 'mongodb://127.0.0.1:27017/test';
 ```
 
-Agora que sabemos onde encontrar a _connection string_ (no módulo config),
-podemos prosseguir e estabelecer uma conexão com o banco de dados usando
-o cliente escolhido.
+Ahora que ya sabemos dónde encontrar el _connection string_ (en el módulo
+config), podemos proceder a establecer una conexión con la base de datos
+usando el cliente elegido.
 
-### Exemplo de conexão usando o driver do MongoDB para Node.js
+### Ejemplo de conexión usando MongoDB Node Driver
 
 ```js
 const { MongoClient } = require('mongodb');
 const config = require("./config");
+
+const client = new MongoClient(config.dbUrl);
 
 async function connect() {
   try {
@@ -99,55 +103,56 @@ async function connect() {
 }
 ```
 
-Você pode encontrar mais exemplos
-[na documentação do MongoDB](https://www.mongodb.com/docs/drivers/node/current/).
+Puedes encontrar mas ejemplos en [la documentación de MongoDB](https://www.mongodb.com/docs/drivers/node/current/).
 
 ## 4. Definir esquemas
 
-Como parte do processo de design do nosso banco de dados, precisamos
-especificar os "esquemas" dos nossos "modelos" de dados. Isso significa
-que precisamos descrever de alguma forma a estrutura das coleções que
-vamos usar e a forma dos objetos que vamos armazenar nessas coleções.
+Como parte del proceso de diseño de nuestra base de datos vamos a tener que
+especificar los _esquemas_ de nuestros _modelos_ de datos. Con esto nos
+referimos a que tenemos que _describir_ de alguna forma la estructura de las colecciones
+que vamos a usar y la _forma_ de los objetos que vayamos a
+guardar en esas colecciones.
 
-Você pode usar [a documentación de API](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
-que descreve a estrutura de `products`, `orders`, etc. para orientar o design.
+Puedes usar [la documentación de API](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/2.0.0)
+que describe la estructura de `products`, `orders`, etc. para guiar el diseño.
 
-## 5. Implementar os primeiros TODOs
+## 5. Implementar los primeros TODOs
 
-O boilerplate do projeto vem com arquivos contendo a lógica para iniciar o
-servidor e outros que contêm funções de rotas e autenticação, mas muitos deles estão
-vazios. Marcamos as primeiras partes essenciais com comentários
-"TODO" (em inglês, `a fazer`), que é uma convenção no desenvolvimento de software
-para indicar algo a ser feito.
+El boilerplate del proyecto viene con archivos con lógica para arrancar el server
+y otros que contienen funciones de rutas y autenticación, pero muchas están vacías.
+Hemos marcado las primeras partes esenciales con comentarios `TODO`
+(del inglés _por hacer_), que es una convención en el desarrollo de software,
+cuando queda algo pendiente de hacer.
 
-Aqui vamos orientá-lo um pouco sobre esses TODOs.
+Aquí te guiamos un poco sobre esto TODO's.
 
 ### TODO 1: Conectar a la base de datos
 
-No arquivo `connect.js`, é necessário conectar ao banco de dados..
+En el archivo `connect.js` hay que hacer la conexión con la base de datos.
 
 ```js
 const { dbUrl } = config;
 
 async function connect() {
-  // TODO: Conexão com o Banco de Dados
+  // TODO: Conexión a la Base de Datos
 }
 ```
 
-Aqui você deve usar o `dbUrl` que importamos do config para estabelecer a conexão.
-As funções que vão interagir com o banco de dados devem invocar o `connect`.
+Aquí debes usar el `dbUrl` que importamos del config para establecer la conexión.
+Las funciones que van a interactuar con la base de datos tienen que invocar
+`connect`.
 
-### TODO 2: Criar o usuário _admin_
+### TODO 2: Crear el usuario _admin_
 
-O projeto depende da existência de um usuário no banco de dados que possui privilégios
-de administrador, para que seja possível criar outros usuários, etc.
+El proyecto depende en la existencia de un usuario en la base de datos que
+tiene privilegios de administrador, para así poder crear otros usuarios, etc.
 
-No arquivo `routes/users.js`  invocamos a função `initAdminUser(app, next)`
-no final do arquivo, e definimos essa função acima, no mesmo arquivo.
+En `routes/users.js` invocamos una función `initAdminUser(app, next)`
+al final de archivo, y definimos esta función arriba en este misma archivo.
 
-A função `initAdminUser` está incompleta e há um TODO para criar o usuário admin,
-onde você precisa primeiro verificar se um admin já existe e, caso contrário,
-adicioná-lo ao banco de dados.
+`initAdminUser` está incompleto, y hay un TODO para crear el usuario admin,
+donde tienes que primero chequear si un admin ya existe, y si no agregar uno
+a la base de datos.
 
 ```js
 const initAdminUser = (app, next) => {
@@ -166,96 +171,98 @@ const initAdminUser = (app, next) => {
   next();
 };
 
-Você pode confirmar se o seu código funciona verificando o banco de
-dados e realizando um teste unitário.
+Puedes confirmar si tu código funciona revisando la base de datos y con un testeo unitario.
 
 ```
 
 ### TODO 3: Implementar autenticación de usuario
 
-En routes/auth.js, a rota '/auth' está definida com um
+En `routes/auth.js` está la ruta '/auth' definida, con un
 
 ```js
  // TODO: autenticar a la usuarix
  ```
 
-Aqui é onde você deve verificar se o email e a senha correspondem aos dados de
-algum usuário no banco de dados. Se coincidirem, é necessário gerar um
-[token JWT](https://jwt.io/introduction)
-e enviá-lo na resposta, para que o usuário possa usá-lo em suas futuras
-solicitações. Para exemplos mais detalhados, procure tutoriais de autenticação
-com JWT e node/express.
+Aquí es donde debes verificar que el correo y password coinciden con
+datos de algún usuario en la base de datos. Si coinciden, hay que generar un
+[JWT token](https://jwt.io/introduction)
+y mandarlo en la respuesta, para que el usuario puede usarlo en sus peticiones futuras.
+Para ejemplos con mas detalle, busca tutoriales de autenticación con JWT y node/express.
 
-### TODO 4: Implementar o middleware de autenticação
+### TODO 4: Implementar el middleware de autenticación
 
-Em `middleware/auth.js`, existem vários TODOs.
-Aproveite esta oportunidade para se familiarizar com o
-[conceito de middleware no express](https://expressjs.com/es/guide/using-middleware.html).
+En `middleware/auth.js` hay varios `TODOs`. Usa esta oportunidad para familiarizarte
+con [el concepto de middleware en express](https://expressjs.com/es/guide/using-middleware.html).
 
-A aplicação usará esse middleware para verificar se as solicitações que exigem
-autenticação são autorizadas, ou seja, se possuem um token válido.
+La aplicación va a usar este middleware para chequear que las peticiones
+que requieren autenticación sean autorizados, es decir, que tienen un token válido.
 
-### TODO 5: Implementar a rota GET `/users`
+### TODO 5: Implementar la ruta GET `/users`
 
-Para reunir e verificar todo o trabalho que você fez, seria bom implementar
-uma rota básica da API, neste caso, recomendamos `/users` porque você já deve
-ter o usuário admin em seu banco de dados, e também porque essa rota usa o
-middleware de autenticação.
+Para juntar y verificar todo el trabajo que has hecho, seria bueno implementar
+una ruta básica del API, en este caso recomendamos `/users` porque ya debes
+tener el user admin en tu base de datos, y además porque esta ruta usa
+el middleware de auth.
 
-Você verá que a rota `/users` usa a função `getUsers` que está definida
-em `controller/users.js`.
-O conceito de controller é usado para separar ainda mais a lógica da
-definição de rotas da implementação que irá interagir com o banco de dados.
-É necessário implementar a função `getUsers` para obter a lista de
-usuários da coleção em seu banco de dados.
+Vas a ver que la ruta `/users` usa la función `getUsers` que está definido en
+`controller/users.js`. El concepto de controller nos sirve para separar más
+la lógica de la definición de rutas con la implementación que va a hablar con
+el base de datos. Hay que implementar `getUsers` para obtener la lista de
+users de la colección en tu base de datos.
 
-Consulte o [tutorial de Node.js e express na Mozilla](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes)
-que aborda os controllers.
+Revisa [el tutorial de Node y express en Mozilla](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes)
+que habla de controllers.
 
-## 6. Definir estratégia de testes unitários
+### TODO 6: Implementar la ruta POST `/users`
 
-Além dos testes `e2e` já incluídos no boilerplate do projeto, espera-se
-que você também possa usar testes unitários para o desenvolvimento
-dos diferentes endpoints ou rotas, bem como outros módulos internos
-que decidir desenvolver.
+Los tests e2e invocan la ruta POST `/users` para agregar la usuaria para los tests.
+Por lo tanto, antes de poder ejecutar los tests e2e, esta ruta debe funcionar
+correctamente.
 
-Para realizar testes unitários em `rotas` do Express,
-recomendamos explorar a biblioteca [`supertest`](https://www.npmjs.com/package/supertest),
-, que pode ser usada em combinação com o `jest`.
+## 6. Definir estrategia de pruebas unitarias
 
-Outro ponto a ser considerado nos testes unitários é como fazer `mock` do banco
-de dados. Alguns bancos de dados oferecem ferramentas (como o
-[`mongodb-memory-server`](https://github.com/nodkz/mongodb-memory-server)) que nos
-permitem usar um banco de dados em memória e evitar a necessidade de criar `mocks`
-propriamente ditos. No entanto, geralmente queremos considerar como
-abstrair a interação com o banco de dados para facilitar os `mocks` que nos
-permitirão focar na lógica das rotas.
+Además de las pruebas `e2e` que ya incluye el _boilerplate_ del proyecto, se
+espera que puedas también usar pruebas _unitarias_ para el desarrollo de los
+diferentes _endpoints_ o _rutas_ así como otros módulos internos que decidas
+desarrollar.
 
-## 7. Familiarizar-se com os testes de integração (e2e)
+Para hacer pruebas unitarias de _rutas_ de Express, te recomendamos explorar la
+librería [`supertest`](https://www.npmjs.com/package/supertest), que puedes usar
+en combinación con `jest`.
 
-O _boilerplate_ deste projeto já inclui testes `e2e` (end-to-end) ou
-de integração, que são responsáveis por testar nossa aplicação como um
-todo, por meio da interface HTTP. Ao contrário dos testes unitários,
-em vez de importar ou exigir um módulo e testar uma função isoladamente,
-iremos iniciar toda a aplicação e testá-la como seria usado no mundo real,
-para isso, a aplicação de teste precisará de um banco de dados e escutar em
-uma porta de rede.
+Otro punto a tener en cuenta en las pruebas unitarias, es cómo _mockear_ la base
+de datos. Algunas bases de datos ofrecen herramientas (como
+[`mongodb-memory-server`](https://github.com/nodkz/mongodb-memory-server)) que
+nos permiten usar una base de datos en memoria y así evitar hacer _mocks_ per
+se, pero por lo general querremos considerar cómo abstraer la interacción
+con la base de datos para facilitar _mocks_ que nos permitan concentrarnos en
+la lógica de las rutas.
 
-Para executar testes `e2e` em uma instância local, podemos usar:
+## 7. Familiarizarte con las pruebas de integración (e2e)
+
+El _boilerplate_ de este proyecto ya incluye pruebas `e2e` (end-to-end) o de
+_integración_, que se encargan de probar nuestra aplicación en conjunto,
+a través de la interfaz HTTP. A diferencia de las pruebas unitarias, en vez
+de importar o requerir un módulo y probar una función de forma aislada, lo que
+vamos a hacer es arrancar toda la aplicación, y probarla tal como se usaría en
+el mundo real, para ello la aplicación de prueba necesitará una base de datos y
+escuchar en un puerto de red.
+
+Para correr pruebas e2e sobre instancia local podemos usar:
 
 ```sh
 npm run test:e2e
 ```
 
-Isso inicia a aplicação com npm start e executa os testes contra a
-URL desta instância (por padrão, `http://127.0.0.1:8080`).
+Esto levanta la aplicación con `npm start` y corre los tests contra la URL de
+esta instancia (por defecto `http://127.0.0.1:8080`).
 
-Os testes e2e dependem do código (`globalSetup.js`)[../e2e/globalSetup.js]
-que o jest executa primeiro, antes dos testes. Essa etapa de configuração
-inicia um banco de dados falso (como mencionamos anteriormente, usando o
+Los pruebas e2e dependen del código de (`globalSetup.js`)[../e2e/globalSetup.js]
+que `jest` ejecuta en primer lugar, antes de los tests.
+Este paso de setup levanta un mock db (como hemos hablado de
 [`mongodb-memory-server`](https://github.com/nodkz/mongodb-memory-server))
-e o jest se conecta a esse banco de dados falso.
+y jest se conecta a este mock db.
 
-Para essa configuração, usamos o mongodb-memory-server e um preset
-[`jest-mongodb`](https://github.com/shelfio/jest-mongodb)
+Para este configuración usamos `mongodb-memory-server` y
+un preset [`jest-mongodb`](https://github.com/shelfio/jest-mongodb)
 que ya están incluido en el boilerplate.
